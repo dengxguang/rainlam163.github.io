@@ -13,14 +13,14 @@
 </head>
 <body>
   <div id="app">
-    <header>
-      <h1>记账本</h1>
-    </header>
+    <mu-appbar color="primary">
+      记账本
+    </mu-appbar>
     <div class="content">
-      <div class="content-item" v-for="item in people" :key="item.name" @click="handleEdit(item)" @touchstart="handleTouchStart($event, item)" @touchmove="handleTouchMove" @touchend="handleTouchEnd">
+      <div class="content-item" v-for="item in people" :key="item.name" @touchstart="handleTouchStart($event, item)" @touchmove="handleTouchMove" @touchend="handleTouchEnd">
         <h2>{{item.name}}</h2>
         <h3>{{item.money}}</h3>
-        <hr>
+        <mu-divider></mu-divider>
       </div>
     </div>
     <footer>
@@ -39,6 +39,18 @@
       <mu-button slot="actions" flat @click="showDeleteDlg=false">取消</mu-button>
       <mu-button slot="actions" flat color="primary" @click="handleConfirmDelete">确定</mu-button>
     </mu-dialog>
+    <mu-bottom-sheet :open.sync="showBottomOpr">
+      <mu-list @item-click="handleUpdateOrDelete">
+        <mu-list-item button value="UPDATE">
+          <mu-list-item-action>
+            <mu-list-item-title>修改</mu-list-item-title>
+          </mu-list-item-action>
+        </mu-list-item>
+        <mu-list-item button value="DELETE">
+            <mu-list-item-title>删除</mu-list-item-title>
+        </mu-list-item>
+      </mu-list>
+    </mu-bottom-sheet>
   </div>
 </body>
 <script src="js/index.js"></script>

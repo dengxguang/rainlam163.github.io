@@ -5,15 +5,6 @@ h3{
   color: lightslategray;
   margin: 0;
 }
-header{
-  box-shadow: 6px 6px 10px lightslategray;
-  display: block;
-  padding: 12px;
-}
-header h1{
-  text-align: center;
-  margin: 0;
-}
 .content{
   margin: 24px;
 }

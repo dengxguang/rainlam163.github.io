@@ -4,6 +4,7 @@ const app = new Vue({
     people: [],
     showForm: false,
     showDeleteDlg: false,
+    showBottomOpr: false,
     form: {
       name: '',
       money: 0
@@ -11,11 +12,11 @@ const app = new Vue({
     db: null,
     mode: 'CREATE',
     timeoutEvent: 0,
-    deleteItem: {}
+    selectItem: {}
   },
   computed: {
     deleteTitle() {
-      return `确定删除 ${this.deleteItem.name} 的记录吗？`
+      return `确定删除 ${this.selectItem.name} 的记录吗？`
     }
   },
   methods: {
@@ -43,16 +44,12 @@ const app = new Vue({
             db.person.toArray(array => {
               this.people = array;
               this.showForm = false;
+              this.showBottomOpr = false;
               this.resetForm();
             });
           });
         break;
       }
-    },
-    handleEdit(person) {
-      this.mode = 'UPDATE'
-      this.form = person;
-      this.showForm = true;
     },
     resetForm() {
       this.form = {
@@ -63,8 +60,8 @@ const app = new Vue({
     handleTouchStart(e, person) {
       this.timeoutEvent = setTimeout(() => {
         this.timeoutEvent = 0;
-        this.showDeleteDlg = true;
-        this.deleteItem = person;
+        this.selectItem = person;
+        this.showBottomOpr = true;
       }, 500);
       e.preventDefault();
     },
@@ -77,13 +74,26 @@ const app = new Vue({
       return false;
     },
     handleConfirmDelete() {
-      db.person.delete(this.deleteItem.id).then(() => {
+      db.person.delete(this.selectItem.id).then(() => {
         db.person.toArray(array => {
           this.people = array;
-          this.deleteItem = {};
+          this.selectItem = {};
           this.showDeleteDlg = false;
+          this.showBottomOpr = false;
         });
       });
+    },
+    handleUpdateOrDelete({value}) {
+      switch (value) {
+        case 'UPDATE':
+          this.mode = 'UPDATE'
+          this.form = JSON.parse(JSON.stringify(this.selectItem));
+          this.showForm = true;
+        break;
+        case 'DELETE':
+          this.showDeleteDlg = true;
+        break;
+      }
     }
   },
   mounted() {
