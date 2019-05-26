@@ -1,0 +1,40 @@
+h2{
+  margin: 0;
+}
+h3{
+  color: lightslategray;
+  margin: 0;
+}
+header{
+  box-shadow: 6px 6px 10px lightslategray;
+  display: block;
+  padding: 12px;
+}
+header h1{
+  text-align: center;
+  margin: 0;
+}
+.content{
+  margin: 24px;
+}
+.content .content-item{
+  margin-top: 12px;
+}
+footer{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.form-title{
+  margin: 24px;
+}
+.form-content .form-content-item {
+  margin-top: 12px;
+}
+.btn-add {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgAQMAAADYVuV7AAAABlBMVEUAAAAzMzPI8eYgAAAAAXRSTlMAQObYZgAAAB9JREFUeAFjgIJRwP+BZM4oh/8/GHygIYd8h45yRgEAaHBnmaA4EHkAAAAASUVORK5CYII=);
+  background-size: 100% 100%;
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+}

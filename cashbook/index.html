@@ -1,5 +1,45 @@
-<!DOCTYPE html><html lang=zh-CN><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>记账本</title><script>document.addEventListener('DOMContentLoaded', function() {
-                document.documentElement.style.fontSize = document.documentElement.clientWidth / 20 + 'px'
-            })
-            var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') || CSS.supports('top: constant(a)'))
-            document.write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' + (coverSupport ? ', viewport-fit=cover' : '') + '" />')</script><link rel=stylesheet href=/static/index.css><link href=/static/js/pages-index-index.11c5547c.js rel=prefetch><link href=/static/js/chunk-vendors.606b97f0.js rel=preload as=script><link href=/static/js/index.d4d2834c.js rel=preload as=script></head><body><noscript><strong>Please enable JavaScript to continue.</strong></noscript><div id=app></div><script src=/static/js/chunk-vendors.606b97f0.js></script><script src=/static/js/index.d4d2834c.js></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+  <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+  <script src="https://unpkg.com/muse-ui/dist/muse-ui.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/muse-ui/dist/muse-ui.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>记账本</h1>
+    </header>
+    <div class="content">
+      <div class="content-item" v-for="item in people" :key="item.name" @click="handleEdit(item)" @touchstart="handleTouchStart($event, item)" @touchmove="handleTouchMove" @touchend="handleTouchEnd">
+        <h2>{{item.name}}</h2>
+        <h3>{{item.money}}</h3>
+        <hr>
+      </div>
+    </div>
+    <footer>
+      <mu-button fab @click="handleCreate" class="btn-add"></mu-button>
+    </footer>
+    <mu-dialog title="欠款人信息" width="600" max-width="80%" :open="showForm">
+      <mu-container>
+        <mu-text-field full-width label="姓名" v-model="form.name"></mu-text-field>
+        <mu-text-field full-width type="number" label="金额" v-model="form.money"></mu-text-field>
+      </mu-container>
+      <mu-button slot="actions" flat @click="handleCancel">取消</mu-button>
+      <mu-button slot="actions" flat color="primary" @click="handleConfirm">确定</mu-button>
+    </mu-dialog>
+    <mu-dialog title="提示" width="600" max-width="80%" :open="showDeleteDlg">
+      {{deleteTitle}}
+      <mu-button slot="actions" flat @click="showDeleteDlg=false">取消</mu-button>
+      <mu-button slot="actions" flat color="primary" @click="handleConfirmDelete">确定</mu-button>
+    </mu-dialog>
+  </div>
+</body>
+<script src="js/index.js"></script>
+</html>
