@@ -1,0 +1,12 @@
+.gridlist-demo{
+  width: 360px;
+  overflow-y: auto;
+}
+.gridlist-demo .tile{
+  color: #ffffff;
+  width: 100%;
+  height: 100%;
+}
+.gridlist-demo .tile .tile-row{
+  padding: 6px 18px 0 18px;
+}
