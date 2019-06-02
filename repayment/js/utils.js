@@ -7,3 +7,11 @@ const shuffle = a => {
     a[len - i - 1] = temp;
   }
 }
+
+const getCurrentMonthDays = () => {
+  var curDate = new Date();
+  var curMonth = curDate.getMonth();
+  curDate.setMonth(curMonth + 1);
+  curDate.setDate(0);
+  return curDate.getDate();
+}

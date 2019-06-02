@@ -18,7 +18,7 @@
           还款倒计时
         </mu-appbar>
         <mu-grid-list class="gridlist-demo">
-          <mu-sub-header>还款倒计时：<mu-badge :content="`${latestRepay.days}`" circle color="secondary"></mu-badge> 天 <mu-chip color="blue300">{{latestRepay.bank}}</mu-chip></mu-sub-header>
+          <mu-sub-header>还款倒计时：<mu-badge :content="`${latestRepay.day}`" circle color="secondary"></mu-badge> 天 <mu-chip color="blue300">{{latestRepay.bank}}</mu-chip></mu-sub-header>
           <mu-grid-tile v-for="tile,index in list" :key="`tile${index}`">
             <div class="tile" :style="{backgroundColor: colors[index]}">
               <template v-for="item,i in tile.data">

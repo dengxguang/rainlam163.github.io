@@ -34,25 +34,31 @@ const app = new Vue({
       };
     },
     latestRepay() {
-      let { day, name, bank } = { day: 31, name: '', bank: '' };
+      let { day, name, bank } = { day: -1, name: '', bank: ''};
+      if (this.list.length > 0) {
+        const latestRepay = this.latestRepayInBank(this.list[0]);
+        const restDays = (this.today.month < latestRepay.month ? getCurrentMonthDays() : latestRepay.day) - this.today.day;
+        day = restDays;
+      }
       this.list.forEach(item => {
         const latestRepay = this.latestRepayInBank(item);
-        if (latestRepay.day < day) {
-          day = latestRepay.day;
+        const restDays = (this.today.month < latestRepay.month ? getCurrentMonthDays() : latestRepay.day) - this.today.day;
+        if (restDays < day) {
+          day = restDays;
           name = latestRepay.name;
           bank = latestRepay.bank;
         }
       });
       return {
         name,
-        days: day - this.today.day,
+        day,
         bank
       };
     }
   },
   methods: {
     latestRepayInBank(bankData) {
-      let {day, name} = {day: 0, name: ''};
+      let {day, name} = {day: -1, name: ''};
       if (bankData.data.length > 0) {
         day = bankData.data[0].day;
       }
