@@ -21,22 +21,27 @@
           <mu-sub-header>还款倒计时：<mu-badge :content="`${latestRepay.days}`" circle color="secondary"></mu-badge> 天 <mu-chip color="blue300">{{latestRepay.bank}}</mu-chip></mu-sub-header>
           <mu-grid-tile v-for="tile,index in list" :key="`tile${index}`">
             <div class="tile" :style="{backgroundColor: colors[index]}">
-              <mu-row class="tile-row" v-for="item,i in tile.data" :key="`data${i}`">
-                <mu-col span="6">
-                  {{item.name}}
-                </mu-col>
-                <mu-col span="6">
-                    {{item.day}}日
+              <template v-for="item,i in tile.data">
+                <mu-row class="tile-row" :key="`data${i}`">
+                  <mu-col span="9">
+                    {{item.name}}
                   </mu-col>
-              </mu-row>
+                  <mu-col span="3">
+                      {{item.day}}日
+                    </mu-col>
+                </mu-row>
+                <mu-divider shallow-inset></mu-divider>
+              </template>
             </div>
             <span slot="title">{{tile.name}}</span>
-            <span slot="subTitle">最近还款日 <b>{{today.year}}-{{today.month}}-{{latestRepayInBank(tile).day}}</b></span>
+            <span slot="subTitle">最近还款日 <b>{{today.year}}-{{latestRepayInBank(tile).month}}-{{latestRepayInBank(tile).day}}</b></span>
           </mu-grid-tile>
         </mu-grid-list>
       </mu-paper>
     </mu-flex>
   </mu-container>
-  <script src="./index.js"></script>
+  <script src="./js/data.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/index.js"></script>
 </body>
 </html>
